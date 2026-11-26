@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>happy 2 years <3</title>
+  <style>
+    :root {
+      --paper: #fffaf7;
+      --ink: #493b3b;
+      --muted: #887575;
+      --rose: #d98f9d;
+      --rose-dark: #b96f80;
+      --blush: #f8e8e8;
+      --line: #ead8d7;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.7;
+    }
+    .progress {
+      position: fixed; inset: 0 0 auto; height: 4px; z-index: 5;
+      background: #f1dddd;
+    }
+    .progress span { display: block; height: 100%; width: 0; background: var(--rose-dark); }
+    header {
+      min-height: 92vh; display: grid; place-items: center; text-align: center;
+      padding: 80px 22px; position: relative; overflow: hidden;
+      background: radial-gradient(ellipse at 50% 40%, #fff 0, #fff6f3 48%, #f6e3e4 100%);
+    }
+    header:before, header:after {
+      content: "♡"; position: absolute; color: #e8bdc3; opacity: .55;
+      font-size: clamp(70px, 13vw, 150px); transform: rotate(-15deg);
+    }
+    header:before { left: 7%; top: 13%; }
+    header:after { right: 8%; bottom: 10%; transform: rotate(13deg); }
+    .hero { max-width: 700px; position: relative; z-index: 1; }
+    .eyebrow {
+      text-transform: lowercase; letter-spacing: .18em; color: var(--rose-dark);
+      font: 12px/1.5 Arial, sans-serif;
+    }
+    h1 { font-size: clamp(48px, 9vw, 88px); line-height: 1.04; font-weight: 400; margin: 18px 0; }
+    .hero p { color: var(--muted); font-size: 18px; }
+    button, .button {
+      border: 0; border-radius: 999px; padding: 12px 22px; cursor: pointer;
+      background: var(--rose-dark); color: white; font: 14px Arial, sans-serif;
+      text-decoration: none; display: inline-block; transition: transform .2s, background .2s;
+    }
+    button:hover, .button:hover { transform: translateY(-2px); background: #a85d70; }
+    .outline { background: transparent; color: var(--rose-dark); border: 1px solid var(--rose); }
+    .outline:hover { background: var(--blush); color: var(--rose-dark); }
+    main { max-width: 850px; margin: auto; padding: 35px 20px 100px; }
+    .intro { text-align: center; padding: 55px 10px 35px; }
+    .intro h2, .ending h2 { font-weight: 400; font-size: clamp(28px, 5vw, 42px); line-height: 1.25; }
+    .intro p { color: var(--muted); }
+    .memory {
+      background: var(--white); border: 1px solid var(--line); border-radius: 18px;
+      padding: clamp(24px, 5vw, 42px); margin: 24px 0; box-shadow: 0 8px 28px rgba(108, 70, 75, .045);
+      scroll-margin-top: 25px;
+    }
+    .memory-number {
+      color: var(--rose-dark); font: 11px Arial, sans-serif; letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+    h3 { font-weight: 400; font-size: clamp(25px, 4vw, 34px); line-height: 1.2; margin: 8px 0 20px; }
+    .memory p { margin: 10px 0; }
+    .memory .soft { color: var(--muted); }
+    .question {
+      margin-top: 25px; padding: 20px; background: var(--blush); border-radius: 13px;
+    }
+    .question label, .question .prompt { display: block; margin-bottom: 10px; }
+    input[type="text"], input[type="number"] {
+      width: 100%; max-width: 360px; border: 1px solid #dfc4c7; border-radius: 9px;
+      padding: 11px 13px; background: white; color: var(--ink); font: 15px Arial, sans-serif;
+    }
+    input[type="range"] { width: min(100%, 300px); accent-color: var(--rose-dark); }
+    .answer { min-height: 25px; color: var(--rose-dark); font-style: italic; margin-top: 10px; }
+    .song-list { list-style: none; padding: 0; margin: 18px 0; counter-reset: songs; }
+    .song-list li { border-bottom: 1px solid var(--line); padding: 8px 0; }
+    .song-list li:before { counter-increment: songs; content: counter(songs) ". "; color: var(--rose-dark); }
+    .playlist-link { display: none; margin-top: 14px; }
+    .ending {
+      text-align: center; padding: 75px 12px 30px;
+      background: radial-gradient(ellipse at center, #fff 0, transparent 70%);
+    }
+    .ending p { margin: 15px auto; max-width: 620px; }
+    .heart { color: var(--rose-dark); font-size: 36px; margin-top: 25px; }
+    footer { text-align: center; color: #a58e8e; font: 11px Arial, sans-serif; padding: 0 20px 35px; }
+    @media (max-width: 560px) {
+      header { min-height: 84vh; }
+      .memory { border-radius: 14px; }
+      .question { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress"><span id="progressBar"></span></div>
+  <header>
+    <div class="hero">
+      <div class="eyebrow">a little something for us</div>
+      <h1>happy 2 years<br>baby <span style="color:#c77d8d">&lt;3</span></h1>
+      <p>i was struggling with what to do for our 2 years, so...</p>
+      <p>i decided to make a little game about us!</p>
+      <p>i hope you enjoy :)</p>
+      <a class="button" href="#begin">let's begin ↓</a>
+    </div>
+  </header>
+
+  <main id="begin">
+    <section class="intro">
+      <div class="eyebrow">two years of us</div>
+      <h2>i cant believe we have been together for 2 whole years!</h2>
+      <p>we have gone on so many adventures and i cant wait to see whats next for us.</p>
+      <p>lets take a little trip down memory lane...</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #1</div><h3>tilt arcade bar</h3>
+      <p>all the times we went to tilt arcade bar</p>
+      <p>and when i absolutely destroyed you at streetfighter? (more times than one might i add...)</p>
+      <p>i hope you remember that because i certainly do.</p>
+      <div class="question">
+        <label for="score">what was the score again? (be honest):</label>
+        <input id="score" type="text" placeholder="your answer...">
+        <div class="answer" id="scoreAnswer"></div>
+      </div>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #2</div><h3>our soundtrack</h3>
+      <p>i know you like making fun of me for not listening to song lyrics, so i wanted to take a moment to prove that wrong.</p>
+      <p>here are a few songs that remind me of us...</p>
+      <p><strong>top 5 songs that remind me of you:</strong></p>
+      <ol class="song-list">
+        <li>lovesong by beabadoobee</li>
+        <li>[add your song here]</li>
+        <li>[add your song here]</li>
+        <li>[add your song here]</li>
+        <li>[add your song here]</li>
+      </ol>
+      <div class="question">
+        <span class="prompt">would you like a playlist of all my favourite songs that remind me of you/us?</span>
+        <button onclick="showPlaylist(true)">yes please</button>
+        <button class="outline" onclick="showPlaylist(false)">no thank you</button>
+        <div class="answer" id="playlistAnswer"></div>
+        <a class="button playlist-link" id="playlistLink" href="#" target="_blank" rel="noopener">here you go :)</a>
+      </div>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #3</div><h3>split fiction and it takes two</h3>
+      <p>remember playing split fiction together?</p>
+      <p>i love getting to play games with you, its so nice having a hobby that we both enjoy</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #4</div><h3>the broken foot era</h3>
+      <p>we certainly had an interesting journey with your broken foot.</p>
+      <p>i hope your foot has forgiven us for everything.</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #5</div><h3>valentine's day</h3>
+      <p>remember making our valentine's day presents together?</p>
+      <p>in the same room because neither of us had finished them in time.</p>
+      <p>genuinely one of my favourite nights ever, cause then we yk.. did the deed...</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #6</div><h3>pretty nails</h3>
+      <p>getting our nails done together!</p>
+      <p>having matching nails was so cute of us and i want to do it more often but i hate how much it costs</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #7</div><h3>new year's</h3>
+      <p>getting to celebrate new year's with you was so special and i am so happy we got to experience that</p>
+      <p>i hope we get to celebrate a whole lot more together.</p>
+      <div class="question">
+        <span class="prompt">do you want to run it back this year?</span>
+        <button onclick="reply('newYearAnswer','obviously!!')">yes</button>
+        <button class="outline" onclick="reply('newYearAnswer','rude. just kidding, i love you')">no</button>
+        <div class="answer" id="newYearAnswer"></div>
+      </div>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #8</div><h3>the smashing pumpkins</h3>
+      <p>we got to see the smashing pumpkins together!!</p>
+      <p>another thing i get to say i experienced with my favourite person!</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #9</div><h3>rock climbing</h3>
+      <p>we went rock climbing together not once, but twice</p>
+      <p>even though i genuinely was such a negative nancy the second time around so im sorry...</p>
+      <p>and i promise if we go again i will pay for my own pass</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #10</div><h3>our child</h3>
+      <p>we have a child.</p>
+      <p>and somehow our child is dating the rizzler.</p>
+      <p>i really dont know where we went wrong, i thought we raised her well...</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #11</div><h3>the pinery</h3>
+      <p>our camping trip to the pinery!</p>
+      <p>getting to see where you had your first job, and being zen ahh in nature</p>
+      <p>... and getting absolutely BODIED by the waves, like what the hell</p>
+      <p>i hope we get to go on lots more camping trips together.</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #12</div><h3>the icy walk</h3>
+      <p>remember our really long walk in the middle of winter last year</p>
+      <p>when it was freezing cold but lowkey pretty ahh?</p>
+      <p>i genuinely dont know why we decided that was a good idea, but i wouldnt change it for a thing</p>
+      <p>and im glad we did it together.</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #13</div><h3>endless trips to camlachie</h3>
+      <p>getting to go to camlachie so many times has been so lovely.</p>
+      <p>i love getting to see the place that made you who you are.</p>
+      <p>getting to know where you grew up, the places you love, and all the little things that make you you.</p>
+      <p>it makes me realize how lucky i am that i get to love you.</p>
+      <p>and im happy this is where we are spending our 2 years</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #14</div><h3>one year</h3>
+      <p>i still look at the book you made me for our one year anniversary.</p>
+      <p>it was one of the sweetest things anyone has ever done for me.</p>
+      <p>i hope you know how much i treasure it, and how much i enjoy whenever i get something new to add to it</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #15</div><h3>codenames and the board game cafe that was far too expensive for what it was</h3>
+      <p>playing codenames together...</p>
+      <p>and me being absolutely horrendous at it.</p>
+      <p>thank you for putting up with me.</p>
+      <div class="question">
+        <label for="codenames">on a scale of 1-10, how bad am i at codenames?</label>
+        <input id="codenames" type="range" min="1" max="10" value="5" oninput="document.getElementById('rating').textContent=this.value">
+        <strong id="rating">5</strong>/10
+        <div class="answer" id="codenamesAnswer"></div>
+        <button onclick="reply('codenamesAnswer','i knew it. still love you though <3')">submit rating</button>
+      </div>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #16</div><h3>natsci study days</h3>
+      <p>all of our natsci study days!</p>
+      <p>even the days when we probably got more distracted than actual studying.</p>
+      <p>i love getting to do the ordinary things with you too.</p>
+    </section>
+
+    <section class="memory">
+      <div class="memory-number">memory #17</div><h3>heated rivalry</h3>
+      <p>watching heated rivalry together over facetime.</p>
+      <p>even when we arent physically together, i love finding little ways to spend time with you.</p>
+    </section>
+
+    <section class="ending">
+      <div class="eyebrow">and thats our little adventure!</div>
+      <h2>happy anniversary baby.</h2>
+      <p>baby, i hope you know how much these past two years have meant to me</p>
+      <p>i love all of our big adventures, but i also love all the little moments</p>
+      <p>the random walks, the games, the concerts, the study days, and even the ones where we just chud out.</p>
+      <p>thank you for being my favourite person to make memories with</p>
+      <p>i feel so lucky that i get to experience life with you, even on the bad days.</p>
+      <p>i cant wait for all the memories we havent made yet.</p>
+      <h2>happy anniversary baby. i love you so much &lt;3</h2>
+      <div class="heart">♡</div>
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})">back to the beginning ↑</button>
+    </section>
+  </main>
+  <footer>made with love, for our two years ♡</footer>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (total > 0 ? window.scrollY / total * 100 : 0) + '%';
+    });
+    document.getElementById('score').addEventListener('input', () => {
+      document.getElementById('scoreAnswer').textContent = 'i will be accepting this answer as the official record.';
+    });
+    function showPlaylist(yes) {
+      const message = document.getElementById('playlistAnswer');
+      const link = document.getElementById('playlistLink');
+      if (yes) {
+        message.textContent = 'yay! here you go :)';
+        // replace the # below with your playlist URL before sharing the page
+        link.href = '#';
+        link.style.display = 'inline-block';
+      } else {
+        message.textContent = 'okay baby, maybe another time <3';
+        link.style.display = 'none';
+      }
+    }
+    function reply(id, message) {
+      document.getElementById(id).textContent = message;
+    }
+  </script>
+</body>
+</html>
